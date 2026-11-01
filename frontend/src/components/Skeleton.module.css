@@ -1,0 +1,10 @@
+.wrap {
+  display: grid;
+  gap: 8px;
+}
+
+.block {
+  min-height: 48px;
+  border-radius: 4px;
+  background: var(--color-muted);
+}

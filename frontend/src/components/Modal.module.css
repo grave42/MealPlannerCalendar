@@ -1,0 +1,49 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: color-mix(in srgb, var(--color-text) 40%, transparent);
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(560px, 100%);
+  max-height: 90vh;
+  border: 1px solid var(--color-muted);
+  border-radius: 6px;
+  background: var(--color-bg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-muted);
+  background: var(--color-accent);
+}
+
+.title {
+  font-size: 1.1rem;
+}
+
+.close {
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0 6px;
+  cursor: pointer;
+}
+
+.body {
+  padding: 16px;
+  overflow-y: auto;
+}
