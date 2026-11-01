@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="changelog-1.0-create_table-dish" author="calendar">
+        <comment>Создание таблицы блюд (картотека)</comment>
+
+        <createTable tableName="dish" remarks="Блюда общей картотеки">
+            <column name="id" type="uuid" defaultValueComputed="gen_random_uuid()" remarks="Идентификатор блюда">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(200)" remarks="Название блюда">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text" remarks="Описание блюда"/>
+            <column name="ingredients" type="text" remarks="Состав для приготовления (многострочный текст)"/>
+            <column name="instructions" type="text" remarks="Описание приготовления (многострочный текст)"/>
+            <column name="image" type="bytea" remarks="Картинка блюда (до 5 МБ)"/>
+            <column name="image_content_type" type="varchar(50)" remarks="Тип содержимого картинки (image/jpeg, image/png, image/webp)"/>
+            <column name="meal_types" type="jsonb" defaultValue="[]" remarks="Метки приёмов пищи: JSONB-массив строк BREAKFAST, LUNCH, DINNER, SNACK">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="bigint" defaultValueComputed="${now}" remarks="Время создания (epoch, мс)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_user" type="varchar(100)" defaultValue="anonymous" remarks="Кто создал (идентификатор клиента)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modify_time" type="bigint" defaultValueComputed="${now}" remarks="Время последнего изменения (epoch, мс)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modify_user" type="varchar(100)" defaultValue="anonymous" remarks="Кто изменил последним (идентификатор клиента)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="dish"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

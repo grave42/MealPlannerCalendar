@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="changelog-1.1-create_table-meal_plan_entry" author="calendar">
+        <comment>Создание таблицы записей плана питания</comment>
+
+        <createTable tableName="meal_plan_entry" remarks="Записи плана питания: блюдо в слоте (дата + тип приёма пищи)">
+            <column name="id" type="uuid" defaultValueComputed="gen_random_uuid()" remarks="Идентификатор записи">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="plan_date" type="date" remarks="Календарная дата приёма пищи">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meal_type" type="varchar(20)" remarks="Тип приёма пищи: BREAKFAST, LUNCH, DINNER, SNACK">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dish_id" type="uuid" remarks="Ссылка на блюдо">
+                <constraints nullable="false"
+                             foreignKeyName="fk_meal_plan_entry_dish"
+                             references="dish(id)"
+                             deleteCascade="true"/>
+            </column>
+            <column name="position" type="integer" remarks="Порядковый номер блюда в слоте">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="bigint" defaultValueComputed="${now}" remarks="Время создания (epoch, мс)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_user" type="varchar(100)" defaultValue="anonymous" remarks="Кто создал (идентификатор клиента)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modify_time" type="bigint" defaultValueComputed="${now}" remarks="Время последнего изменения (epoch, мс)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modify_user" type="varchar(100)" defaultValue="anonymous" remarks="Кто изменил последним (идентификатор клиента)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="meal_plan_entry" indexName="ux_meal_plan_entry_slot_dish" unique="true">
+            <column name="plan_date"/>
+            <column name="meal_type"/>
+            <column name="dish_id"/>
+        </createIndex>
+
+        <createIndex tableName="meal_plan_entry" indexName="ix_meal_plan_entry_plan_date">
+            <column name="plan_date"/>
+        </createIndex>
+
+        <rollback>
+            <dropTable tableName="meal_plan_entry"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
