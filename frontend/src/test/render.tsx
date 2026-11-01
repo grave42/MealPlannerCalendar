@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import { MemoryRouter, useLocation } from 'react-router-dom';
-import { AppRoutes } from '../App';
+import { AppRoutes, routerFuture } from '../App';
 import { ToastProvider } from '../components/Toast';
 
 function LocationProbe() {
@@ -16,7 +16,7 @@ export function renderApp(route = '/') {
   return render(
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
-        <MemoryRouter initialEntries={[route]}>
+        <MemoryRouter initialEntries={[route]} future={routerFuture}>
           <AppRoutes />
           <LocationProbe />
         </MemoryRouter>

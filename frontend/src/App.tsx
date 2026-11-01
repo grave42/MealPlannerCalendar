@@ -5,6 +5,8 @@ import { DayPage } from './pages/DayPage';
 import { DishFormPage } from './pages/DishFormPage';
 import { DishesPage } from './pages/DishesPage';
 
+export const routerFuture = { v7_startTransition: true, v7_relativeSplatPath: true };
+
 export function AppRoutes() {
   return (
     <Routes>

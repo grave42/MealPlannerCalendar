@@ -10,6 +10,9 @@ globalThis.fetch = ((input: RequestInfo | URL, init?: RequestInit) =>
     ? originalFetch(new URL(input, 'http://localhost').href, init)
     : originalFetch(input, init)) as typeof fetch;
 
+URL.createObjectURL = () => 'blob:mock-preview';
+URL.revokeObjectURL = () => undefined;
+
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterEach(() => {
   cleanup();
