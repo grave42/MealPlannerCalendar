@@ -28,5 +28,8 @@ public interface DishEntityMapper extends BaseEntityMapper<DishEntity> {
     @Mapping(target = "createUser", ignore = true)
     @Mapping(target = "image", ignore = true)
     @Mapping(target = "imageContentType", ignore = true)
+    @Mapping(target = "mealTypes",
+            expression = "java(source.getMealTypes() == null ? new java.util.LinkedHashSet<>() "
+                    + ": new java.util.LinkedHashSet<>(source.getMealTypes()))")
     void patchEntityFromEntity(DishEntity source, @MappingTarget DishEntity target);
 }

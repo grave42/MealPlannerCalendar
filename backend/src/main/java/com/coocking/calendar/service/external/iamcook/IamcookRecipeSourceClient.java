@@ -286,7 +286,7 @@ public class IamcookRecipeSourceClient implements RecipeSourceClient {
         }
         List<String> steps = new ArrayList<>();
         for (Element paragraph : block.select("p")) {
-            if (!paragraph.select("div.primg, img").isEmpty() || !paragraph.parents().select("div.primg").isEmpty()) {
+            if (!paragraph.select("div.primg, img").isEmpty() || Objects.nonNull(paragraph.closest("div.primg"))) {
                 continue;
             }
             if (StringUtils.hasText(paragraph.text())) {
