@@ -1,0 +1,19 @@
+﻿# Gradle / Java
+.gradle/
+build/
+*.class
+# Node
+node_modules/
+dist/
+coverage/
+# IDE
+.idea/
+*.iml
+.vscode/
+# Env / secrets
+.env
+.env.*
+# Superpowers workspace
+.superpowers/
+# OS
+Thumbs.db
