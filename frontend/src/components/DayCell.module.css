@@ -1,0 +1,58 @@
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  min-height: 150px;
+  padding: 6px;
+  border: 2px solid var(--color-muted);
+  background: var(--color-bg);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+a.cell:hover {
+  background: var(--color-accent);
+}
+
+.outside {
+  background: var(--color-muted);
+}
+
+.today {
+  border-color: var(--color-primary);
+}
+
+.today .number {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.head {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.number {
+  font-weight: 600;
+}
+
+.weekday {
+  display: none;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 767px) {
+  .cell {
+    min-height: 0;
+  }
+
+  .outside {
+    display: none;
+  }
+
+  .weekday {
+    display: inline;
+  }
+}

@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: meal-planner-calendar
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+  codec:
+    max-in-memory-size: 6MB
+  webflux:
+    multipart:
+      max-in-memory-size: 6MB
+      max-disk-usage-per-part: 6MB
+      max-parts: 10
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+server:
+  port: 8080
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  external-recipe:
+    source: iamcook
+    base-url: https://www.iamcook.ru
+    search-path: /advsearch
+    recipe-path: /showrecipe/
+    timeout: 10s
+    min-request-interval: 1s
+    max-results: 10
+    max-image-size: 5MB
+    user-agent: "MealPlannerCalendar/1.0 (семейное приложение планирования питания)"
+    image-host-suffix: iamcook.ru
+    selectors:
+      search-container: "#advsearch"
+      search-card: "div.recblockwide"
+      search-card-title: "div.header a"
+      search-card-link: "a[href^=\"/showrecipe/\"]"
+      search-card-image: "img.preimage"
+      search-count: "p.scnotice"
+      recipe-title: "#recbody h1"
+      recipe-description: "div.recdescription"
+      recipe-ingredients: "div.ingredients div.ilist"
+      recipe-instructions: "div.instructions"
+      recipe-image-meta: "meta[property=\"og:image\"]"
+      recipe-json-ld: "script[type=\"application/ld+json\"]"

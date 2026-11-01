@@ -1,0 +1,27 @@
+.header {
+  border-bottom: 1px solid var(--color-muted);
+  background: var(--color-bg);
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 16px;
+}
+
+.link {
+  padding: 2px 0;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.link:hover {
+  background: var(--color-accent);
+}
+
+.active {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
